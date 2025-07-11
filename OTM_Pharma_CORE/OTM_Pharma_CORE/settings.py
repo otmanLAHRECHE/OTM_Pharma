@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'auth',
+    'otm_users_auth',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +83,9 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'OTM_Admin',
+        'NAME': 'otm',
+        'USER': 'otm_user',
+        'PASSWORD': '1997_1997',
         'HOST': 'localhost',
         'PORT': '5432',
     }
