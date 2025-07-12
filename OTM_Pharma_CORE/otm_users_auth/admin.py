@@ -9,7 +9,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     model = User
     list_display = (
-        "email", "first_name", "last_name", "is_staff")
+        "email", "first_name", "last_name", "type_user", "is_staff")
     list_filter = (
         "is_staff", "is_superuser", "is_active", "groups")
     fieldsets = (
@@ -25,7 +25,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             "classes": ("wide",),
             "fields": (
-                "email", "password1", "password2"
+                "email", "password1", "password2","type_user"
             )}),
     )
     search_fields = ("email","first_name", "last_name")
