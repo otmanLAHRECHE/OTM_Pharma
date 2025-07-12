@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +44,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
 ]
+
+
+AUTH_USER_MODEL = 'otm_users_auth.User'
+AUTH_PROFILE_MODULE = 'otm_users_auth.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +87,7 @@ WSGI_APPLICATION = 'OTM_Pharma_CORE.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'otm',
+        'NAME': 'otm2',
         'USER': 'otm_user',
         'PASSWORD': '1997_1997',
         'HOST': 'localhost',
