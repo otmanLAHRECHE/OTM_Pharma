@@ -33,3 +33,11 @@ class IsPharmacist(IsRole):
     Permission class allowing only Pharmacists or Admins.
     """
     role = "pharmacist"
+
+
+
+class IsPharmacistAssistant(IsRole):
+    """
+    Permission class allowing only Pharmacists or Admins.
+    """
+    role = "pharmacist_assistant"
