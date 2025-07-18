@@ -22,11 +22,20 @@ class TimeStampedModel(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     
-    def __str__(self):
-        return str(self.name)
+    class Meta:
+        abstract = True
 
 
 class Manufacturer(TimeStampedModel):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(unique=True, max_length=50)
+    country = models.CharField(null=True, blank=True, max_length=50)
+    address = models.CharField(null=True, blank=True, max_length=50)
+
+    def __str__(self):
+        return str(self.name)
+    
+class Supplier(TimeStampedModel):
     id = models.AutoField(primary_key=True)
     name = models.CharField(unique=True, max_length=50)
     country = models.CharField(null=True, blank=True, max_length=50)
@@ -42,11 +51,19 @@ class DCI(TimeStampedModel):
 
     def __str__(self):
         return str(self.dci)
+    
+class Famille(TimeStampedModel):
+    id = models.AutoField(primary_key=True)
+    famille_name = models.CharField(unique=True, max_length=70)
+
+    def __str__(self):
+        return str(self.famille_name)
 
 class Medic(TimeStampedModel):
     id = models.AutoField(primary_key=True)
     forme = models.CharField(unique=True, max_length=70)
     dosage = models.CharField(max_length=40)
+    medic_famille = models.ForeignKey(Famille, on_delete=models.CASCADE, related_name="medicsByFamille")
     medic_dci = models.ForeignKey(DCI, on_delete=models.CASCADE, related_name="medicsByDci")
     medic_manufact = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name="medicsByMnf")
 
@@ -91,6 +108,7 @@ class Batch(TimeStampedModel):
     )
     expiry_date = models.DateField(auto_now=False, auto_now_add=False)
     medicine = models.ForeignKey(Medic, on_delete=models.CASCADE, related_name="batches")
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, related_name="batches")
     stock_units = models.PositiveIntegerField()
     units_per_pack = models.PositiveSmallIntegerField(default=1)
     price = models.DecimalField(
