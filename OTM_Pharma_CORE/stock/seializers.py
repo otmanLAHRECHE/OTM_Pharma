@@ -39,40 +39,6 @@ class MedicSerializer(serializers.ModelSerializer):
         fields = ["id", "forme", "dosage", "medic_famille", "medic_dci", "medic_manufact"]
 
 
-class MedicInSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Medic
-        fields = ["id",
-                   "forme",
-                     "dosage",
-                       "medic_famille",
-                         "medic_dci",
-                           "medic_manufact"]
-
-
-class MedicRetrieveSerializer(serializers.ModelSerializer):
-    medic_dci = serializers.StringRelatedField()
-    medic_famille = serializers.StringRelatedField()
-    medic_manufact = serializers.StringRelatedField()
-    barcodes = serializers.SerializerMethodField()
-
-    def get_barcodes(self, obj):
-        """Get all barcodes associated with this medicine's batches."""
-        barcodes = obj.batches.values_list("barcode", flat=True)
-        return list(barcodes)
-    
-    class Meta:
-        model = Medic
-        fields = ["id",
-                   "forme",
-                     "dosage",
-                       "medic_famille",
-                         "medic_dci",
-                           "medic_manufact",
-                                "barcodes",]
-        
-        read_only_fields = ["barcodes"]
 
 
 class BatshSerializer(serializers.ModelSerializer):
@@ -84,12 +50,3 @@ class BatshSerializer(serializers.ModelSerializer):
         model = Batch
         fields = ["id", "barcode", "expiry_date", "medicine", "supplier", "stock_units", "units_per_pack", "price"]
 
-
-class BatshInSerializer(serializers.ModelSerializer):
-
-    medicine = MedicSerializer()
-    supplier = SupplierSerializer()
-
-    class Meta:
-        model = Batch
-        fields = ["id", "barcode", "expiry_date", "medicine", "supplier", "stock_units", "units_per_pack", "price"]
