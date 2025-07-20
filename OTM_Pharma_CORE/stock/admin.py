@@ -36,7 +36,7 @@ class FamilleAdmin(admin.ModelAdmin):
 class MedicAdmin(admin.ModelAdmin):
     list_display = ['forme', 'dosage', 'medic_dci', 'medic_famille', 'medic_manufact', 'stock', 'is_available']
     search_fields = ['forme', 'dosage']
-    list_filter = ['medic_dci', 'medic_famille', 'medic_manufact']
+    list_filter = ['forme','medic_dci', 'medic_famille', 'medic_manufact']
     ordering = ['forme']
 
 

@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('otm_users_auth/', include('otm_users_auth.urls')),
+    path('inv/', include('stock.urls')),
 ]
